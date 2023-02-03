@@ -29,11 +29,9 @@ export const Card1 = () => {
 			});
 	}, []);
 
-	useEffect(() => {}, [page]);
+	// useEffect(() => {
 
-	const display = () => {
-		return post[0].name;
-	};
+	// }, [page]);
 
 	let postno = post.length;
 	console.log(postno);
@@ -44,56 +42,63 @@ export const Card1 = () => {
 	var count3 = page;
 	// var c= count3
 	count3 = Number(count3);
-	count3 = (count3 - 1) * 3;
+	count3 = (count3 - 1) * 3 - 1;
 
 	function displayCard() {
 		{
 			count2 = count2 + 1;
 			count3 = count3 + 1;
+			// console.log(p)
 		}
 
 		while (count2 < 4) {
-			console.log(count3);
 			
+			console.log(count3);
+			console.log(count2)
 			// count3= count3-1
 			// console.log(count3);
 
-			return (
-				<div>
-					<Card sx={{ minWidth: 275 }} className="cardproperty">
-						<CardContent>
-							<Typography
-								sx={{ fontSize: 14 }}
-								color="text.secondary"
-								gutterBottom
-							>
-								{post[count3-1].company.name}
-							</Typography>
-						</CardContent>
-						<CardContent>
-							<Typography color="text.primary">Contact</Typography>
-							<Typography color="text.secondary">
-								{post[count3-1].name}
-							</Typography>
-						</CardContent>
-						<CardContent>
-							<Typography color="text.primary">Street</Typography>
-							<Typography color="text.secondary">
-								{post[count3-1].address.street}
-							</Typography>
-						</CardContent>
-						<CardContent>
-							<Typography color="text.primary"> City</Typography>
-							<Typography color="text.secondary">
-								{post[count3-1].address.city}
-							</Typography>
-						</CardContent>
-						<CardActions>
-							<Button size="small">View Details</Button>
-						</CardActions>
-					</Card>
-				</div>
-			);
+			if (count3 < 10) {
+				return (
+					<div>
+						<Card sx={{ minWidth: 275 }} className="cardproperty">
+							<CardContent>
+								<Typography
+									sx={{ fontSize: 14 }}
+									color="text.secondary"
+									gutterBottom
+								>
+									{post[count3].company.name}
+								</Typography>
+							</CardContent>
+							<CardContent>
+								<Typography color="text.primary">Contact</Typography>
+								<Typography color="text.secondary">
+									{post[count3].name}
+								</Typography>
+							</CardContent>
+							<CardContent>
+								<Typography color="text.primary">Street</Typography>
+								<Typography color="text.secondary">
+									{post[count3].address.street}
+								</Typography>
+							</CardContent>
+							<CardContent>
+								<Typography color="text.primary"> City</Typography>
+								<Typography color="text.secondary">
+									{post[count3].address.city}
+								</Typography>
+							</CardContent>
+							<CardActions>
+								<Button size="small">View Details</Button>
+							</CardActions>
+						</Card>
+					</div>
+				);
+			}
+			else if(count3 >= 10){
+				break
+			}
 		}
 	}
 	console.log(postno);
@@ -103,14 +108,14 @@ export const Card1 = () => {
 	};
 	return (
 		<div>
-			{page < 10 ? post.map(displayCard) : null}
+			{page <= Math.ceil(post.length/3) ? post.map(displayCard) : null}
 			<div className="pageproperty">
 				<Pagination
-					count={3}
+					count={4}
 					onChange={(e) => handleChange(e.target.textContent)}
 					setpage={setpage}
 					page={page}
-					nextIconButtonProps={{disabled:true}} and backIconButtonProps={{disabled:true}}
+					
 				/>
 			</div>
 		</div>
