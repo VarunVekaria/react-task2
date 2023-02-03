@@ -54,7 +54,8 @@ export const Card1 = () => {
 
 		while (count2 < 4) {
 			console.log(count3);
-
+			
+			// count3= count3-1
 			// console.log(count3);
 
 			return (
@@ -66,25 +67,25 @@ export const Card1 = () => {
 								color="text.secondary"
 								gutterBottom
 							>
-								{post[count3].company.name}
+								{post[count3-1].company.name}
 							</Typography>
 						</CardContent>
 						<CardContent>
 							<Typography color="text.primary">Contact</Typography>
 							<Typography color="text.secondary">
-								{post[count3].name}
+								{post[count3-1].name}
 							</Typography>
 						</CardContent>
 						<CardContent>
 							<Typography color="text.primary">Street</Typography>
 							<Typography color="text.secondary">
-								{post[count3].address.street}
+								{post[count3-1].address.street}
 							</Typography>
 						</CardContent>
 						<CardContent>
 							<Typography color="text.primary"> City</Typography>
 							<Typography color="text.secondary">
-								{post[count3].address.city}
+								{post[count3-1].address.city}
 							</Typography>
 						</CardContent>
 						<CardActions>
@@ -93,8 +94,6 @@ export const Card1 = () => {
 					</Card>
 				</div>
 			);
-
-			setNo = setNo + 1;
 		}
 	}
 	console.log(postno);
