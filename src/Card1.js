@@ -22,7 +22,7 @@ export const Card1 = () => {
 			.get(baseURL)
 			.then((res) => {
 				setPost(res.data);
-				console.log(res.data);
+				// console.log(res.data);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -32,10 +32,10 @@ export const Card1 = () => {
 	// useEffect(() => {
 
 	// }, [page]);
-
+	const [show, setshow] = useState(false);
 	let postno = post.length;
-	console.log(postno);
-	console.log(post);
+	// console.log(postno);
+	// console.log(post);
 	let [no, setNo] = useState(0);
 	var count = 0;
 	var count2 = 0;
@@ -45,6 +45,15 @@ export const Card1 = () => {
 	count3 = (count3 - 1) * 3 - 1;
 
 	function displayCard() {
+		
+		const analysis = (count3) => {
+			// console.log(e)
+			if (show) {
+				setshow(false);
+			} else {
+				setshow(true);
+			}
+		};
 		{
 			count2 = count2 + 1;
 			count3 = count3 + 1;
@@ -52,9 +61,8 @@ export const Card1 = () => {
 		}
 
 		while (count2 < 4) {
-			
-			console.log(count3);
-			console.log(count2)
+			// console.log(count3);
+			// console.log(count2);
 			// count3= count3-1
 			// console.log(count3);
 
@@ -90,32 +98,47 @@ export const Card1 = () => {
 								</Typography>
 							</CardContent>
 							<CardActions>
-								<Button size="small">View Details</Button>
+								<Button onClick={analysis} size="small">
+									View Details
+								</Button>
 							</CardActions>
+							
 						</Card>
+						<div style={{ display: show ? "flex" : "none" }}>
+							<Card sx={{ minWidth: 275 }} className="cardproperty">
+								<CardContent style={{display:"flex" ,padding:"50px"}}>
+									<Typography>Email:</Typography>
+									<Typography color="text.secondary">{post[count3].email}</Typography>
+									<Typography>City:</Typography>
+									<Typography color="text.secondary">
+										{post[count3].address.city}
+									</Typography>
+								</CardContent>
+							</Card>
+						</div>
+						
+						
 					</div>
 				);
-			}
-			else if(count3 >= 10){
-				break
+			} else if (count3 >= 10) {
+				break;
 			}
 		}
 	}
-	console.log(postno);
+	// console.log(postno);
 	const handleChange = (page) => {
 		Number(page);
 		setpage(page);
 	};
 	return (
 		<div>
-			{page <= Math.ceil(post.length/3) ? post.map(displayCard) : null}
+			{page <= Math.ceil(post.length / 3) ? post.map(displayCard) : null}
 			<div className="pageproperty">
 				<Pagination
 					count={4}
 					onChange={(e) => handleChange(e.target.textContent)}
 					setpage={setpage}
 					page={page}
-					
 				/>
 			</div>
 		</div>
